@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="OrangeHRM" verbose="1" thread-count="5" parallel="tests">
+    <test name="Regression">
+        <classes>
+            <class name="org.orangehrm.pom.tests.LoginTestAsAdmin"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
