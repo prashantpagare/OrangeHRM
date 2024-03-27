@@ -53,10 +53,10 @@ public class LoginTestAsAdmin extends BaseTest {
                 setAddEmployeeDetails(addAndCreateEmployeeDetails).
                 clickOnSaveButton();
 
+        Assert.assertEquals(pimPage.verifyProfileHeader(), "Personal Details");
+        pimPage.clickOnLogout();
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".orangehrm-password-chip")));
-
-
-
     }
+
 
 }

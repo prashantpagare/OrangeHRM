@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.orangehrm.pom.base.BasePage;
+import org.orangehrm.pom.objects.EmployeeLoginCredentials;
 
 public class LoginPage extends BasePage {
 
@@ -33,9 +34,12 @@ public class LoginPage extends BasePage {
     public DashboardPage clickOnLogin(){
         wait.until(ExpectedConditions.elementToBeClickable(submitBtn)).click();
         return new DashboardPage(driver);
-
     }
 
+    public DashboardPage loginIntoApplication(EmployeeLoginCredentials employeeLoginCredentials){
+        return enterUsername(employeeLoginCredentials.getUsername()).
+                enterPassword(employeeLoginCredentials.getPassword()).clickOnLogin();
+    }
 
 
 

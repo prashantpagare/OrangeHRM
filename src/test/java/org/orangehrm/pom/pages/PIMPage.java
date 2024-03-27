@@ -2,6 +2,7 @@ package org.orangehrm.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.orangehrm.pom.base.BasePage;
 import org.orangehrm.pom.objects.AddAndCreateEmployeeDetails;
 
@@ -11,6 +12,7 @@ public class PIMPage extends BasePage {
     private final By firstnameTxtFld = By.xpath("//input[@placeholder='First Name']");
     private final By middlenameTxtFld = By.xpath("//input[@placeholder='Middle Name']");
     private final By lastnameTxtFld = By.xpath("//input[@placeholder='Last Name']");
+    private final By employeeID = By.xpath("//label[contains(text(),'Employee Id')]/parent::div/following-sibling::div/input");
     private final By switchOnToggle = By.cssSelector(".oxd-switch-input--active");
     private final By setNewUsername = By.xpath("(//input[@class='oxd-input oxd-input--active'])[3]");
     private final By statusEnable = By.xpath("//label[normalize-space()='Enabled']");
@@ -20,6 +22,10 @@ public class PIMPage extends BasePage {
     private final By passwordStrengthNotification = By.cssSelector(".orangehrm-password-chip");
     private final By saveBtn = By.xpath("//button[@type='submit']");
     private final By cancelBtn = By.xpath("//button[@type='button']");
+    private final By profileLink = By.xpath("//p[@class='oxd-userdropdown-name']");
+    private final By logout = By.xpath("//a[normalize-space()='Logout']");
+    private final By matchTag = By.xpath("//h6[normalize-space()='Personal Details']");
+
 
     public PIMPage(WebDriver driver) {
         super(driver);
@@ -42,6 +48,12 @@ public class PIMPage extends BasePage {
 
     public PIMPage enterLastName(String lName){
         driver.findElement(lastnameTxtFld).sendKeys(lName);
+        return this;
+    }
+
+    public PIMPage enterEmployeeID(String empID){
+        driver.findElement(employeeID).clear();
+        driver.findElement(employeeID).sendKeys(empID);
         return this;
     }
 
@@ -79,7 +91,8 @@ public class PIMPage extends BasePage {
     public PIMPage setAddEmployeeDetails(AddAndCreateEmployeeDetails addAndCreateEmployeeDetails){
         return enterFirstName(addAndCreateEmployeeDetails.getFirstName())
                 .enterMiddleName(addAndCreateEmployeeDetails.getMiddleName())
-                .enterLastName(addAndCreateEmployeeDetails.getLastName()).
+                .enterLastName(addAndCreateEmployeeDetails.getLastName())
+                .enterEmployeeID(addAndCreateEmployeeDetails.getEmpID()).
                 clickOnCreateLoginSwitch().
                 clickOnStatusAsDisabled().
                 setNewUsernameForLogin(addAndCreateEmployeeDetails.getNewUserName()).
@@ -97,8 +110,15 @@ public class PIMPage extends BasePage {
         return this;
     }
 
+    public PIMPage clickOnLogout(){
+        wait.until(ExpectedConditions.elementToBeClickable(profileLink)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(logout)).click();
+        return this;
+    }
 
-
+    public String verifyProfileHeader(){
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(matchTag)).getText();
+    }
 
 
 

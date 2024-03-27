@@ -5,6 +5,7 @@ public class AddAndCreateEmployeeDetails {
     private String firstName;
     private String middleName;
     private String lastName;
+    private String empID;
     private String newUserName;
     private String newPassword;
     private String newConfirmPassword;
@@ -13,14 +14,15 @@ public class AddAndCreateEmployeeDetails {
     public AddAndCreateEmployeeDetails(){}
 
     // Parameterized
-    public AddAndCreateEmployeeDetails(String firstName,String middleName,String lastName,
+    public AddAndCreateEmployeeDetails(String firstName,String middleName,String lastName,String empID,
                                        String newUserName,String newPassword,String newConfirmPassword){
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.firstName = newUserName;
-        this.firstName = newPassword;
-        this.firstName = newConfirmPassword;
+        this.empID = empID;
+        this.newUserName = newUserName;
+        this.newPassword = newPassword;
+        this.newConfirmPassword = newConfirmPassword;
 
     }
 
@@ -49,6 +51,14 @@ public class AddAndCreateEmployeeDetails {
     public AddAndCreateEmployeeDetails setLastName(String lastName) {
         this.lastName = lastName;
         return this;
+    }
+
+    public String getEmpID() {
+        return empID;
+    }
+
+    public void setEmpID(String empID) {
+        this.empID = empID;
     }
 
     public String getNewUserName() {
