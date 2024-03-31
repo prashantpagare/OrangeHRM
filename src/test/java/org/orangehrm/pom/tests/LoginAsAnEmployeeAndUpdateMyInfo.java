@@ -16,7 +16,7 @@ public class LoginAsAnEmployeeAndUpdateMyInfo extends BaseTest {
 
     @Test
     public void LoginAsAnEmployeeAndUpdateMyInfoPage() throws IOException {
-        EmployeeLoginCredentials employeeLoginCredentials = JacksonUtils.deserializedJson("EmployeeLoginCredentials.json", EmployeeLoginCredentials .class);
+        EmployeeLoginCredentials employeeLoginCredentials = JacksonUtils.deserializedJson("EmployeeLoginCredentials.json", EmployeeLoginCredentials.class);
 
         DashboardPage dashboardPage = new LoginPage(getDriver()).
                 load().loginIntoApplication(employeeLoginCredentials);
@@ -27,9 +27,11 @@ public class LoginAsAnEmployeeAndUpdateMyInfo extends BaseTest {
         myInfoPage.waitForLoadingToDisappear()
                 .updateEmpFirstname("Jackie").
                 updateEmpMiddlename("Chan").
-                updateEmpLastname("China").enterOtherID("69").
-                selectEmpNationality("Zambian").
-                selectMarriageStatus("Single").
+                updateEmpLastname("China").
+                enterOtherID("69").
+                selectDOB("2024-05-07").
+                selectEmpNationality("Indian").
+                selectMarriageStatus("Other").
                 selectGender("Female").
                 clickOnSave();
         Assert.assertEquals("Successfully Updated", myInfoPage.verifySuccessSavedMessage());

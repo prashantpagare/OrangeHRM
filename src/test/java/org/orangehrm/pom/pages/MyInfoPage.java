@@ -20,6 +20,7 @@ public class MyInfoPage extends BasePage {
     private final By empGender = By.xpath("//label[normalize-space()='Male']");
     private final By empMilitaryService = By.xpath("//label[contains(text(),'Military Service')]/parent::div/following-sibling::div/input");
     private final By empSmoker = By.xpath("//input[@type='checkbox']");
+    private final By dob = By.xpath("(//input[@placeholder='yyyy-dd-mm'])[1]");
     private final By empSaveData1 = By.xpath("(//button[@type='submit'])[1]");
     private final By successToastMessage = By.xpath("//p[contains(.,'Successfully Updated')]");
 
@@ -63,6 +64,35 @@ public class MyInfoPage extends BasePage {
     public MyInfoPage enterOtherID(String othID) {
         WebElement empOtherIdElement = wait.until(ExpectedConditions.elementToBeClickable(empOtherID));
         empOtherIdElement.sendKeys(othID);
+        return this;
+    }
+
+    public MyInfoPage selectDOB(String db){
+        wait.until(ExpectedConditions.elementToBeClickable(dob)).sendKeys(db);
+        return this;
+    }
+
+
+    public MyInfoPage selectDateOfBirth(){
+        wait.until(ExpectedConditions.elementToBeClickable(dob)).click();
+
+        WebElement rightArrowClick = driver.findElement(By.cssSelector(".bi-chevron-right"));
+        List<WebElement> calenderDay = driver.findElements(By.cssSelector(".oxd-calendar-date"));
+        WebElement calenderMonth = driver.findElement(By.cssSelector(".oxd-calendar-selector-month-selected"));
+        WebElement calenderYear = driver.findElement(By.cssSelector(".oxd-calendar-selector-year"));
+
+        while(!calenderMonth.getText().contains("July")) {
+//            rightArrowClick.click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[normalize-space()='March']"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[normalize-space()='July']"))).click();
+            for (WebElement day : calenderDay) {
+                String text = day.getText();
+                if (text.equalsIgnoreCase("5")) {
+                    day.click();
+                    break;
+                }
+            }
+        }
         return this;
     }
 

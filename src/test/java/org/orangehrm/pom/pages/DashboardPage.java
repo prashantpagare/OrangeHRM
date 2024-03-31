@@ -11,6 +11,7 @@ public class DashboardPage extends BasePage {
     private final By goToPIMModule = By.cssSelector("a[href*='Pim']");
     private final By titleText = By.xpath("//h6[text()='Dashboard']");
     private final By myInfoLink = By.xpath("//span[normalize-space()='My Info']");
+    private final By claimLink = By.xpath("//span[normalize-space()='Claim']");
     private final By overlay = By.cssSelector(".oxd-loading-spinner");
 
     public DashboardPage(WebDriver driver) {
@@ -28,9 +29,13 @@ public class DashboardPage extends BasePage {
     }
 
     public MyInfoPage navigateToMyInfo(){
-
         wait.until(ExpectedConditions.elementToBeClickable(myInfoLink)).click();
         return new MyInfoPage(driver);
+    }
+
+    public ClaimPage navigateToClaimPage(){
+        wait.until(ExpectedConditions.elementToBeClickable(claimLink)).click();
+        return new ClaimPage(driver);
     }
 
 }
